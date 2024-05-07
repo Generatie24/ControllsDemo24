@@ -1,0 +1,43 @@
+﻿@model MyViewModel
+@{
+    if (Model.SelectedDepartmentId != 0)
+    {
+        <h5>Geselcteerde Department ID: @Model.SelectedDepartmentId</h5>
+        <h5>Geselcteerde Department Text: @Model.SelectedDepartmentText</h5>
+
+        @if (@Model.Cat != null && @Model.Cat.IsActive != null)
+        {
+            <h5>Check Box @Model.Cat.IsActive</h5>
+        }
+    }
+}
+@if (ViewBag.Radio != null)
+{
+    <h5>Radio Button: @ViewBag.Radio</h5>
+}
+
+<form asp-action="SubmitForm">
+
+    <div class="form-group">
+        <select asp-for="@Model.SelectedDepartmentId" class="form-control" asp-items="@Model.DepartmentItems">
+            <option value="">Select an option</option>
+        </select>
+        <span asp-validation-for="@Model.SelectedDepartmentId" class="text-danger"></span>
+    </div>
+    <div>
+        <input asp-for ="Cat.IsActive" type="checkbox" />
+        <label asp-for="Cat.IsActive"></label>
+    </div>
+
+    <div>
+        <input asp-for="Department.SelectedOption" type="radio" value="radio1" id="option" />
+        <label for="radio1">radio 1</label>
+        <input asp-for="Department.SelectedOption" type="radio" value="radio2" id="option" />
+        <label for="radio2">radio 2</label>
+        <input asp-for="Department.SelectedOption" type="radio" value="radio3" id="option" />
+        <label for="radio3">radio 3</label>
+        <input asp-for="Department.SelectedOption" type="radio" value="radio4" id="option" />
+        <label for="radio4">radio 4</label>
+    </div>
+    <button type="submit">Submit</button>
+</form>
